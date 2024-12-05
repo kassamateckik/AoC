@@ -42,7 +42,9 @@ def csere(l, i ,j):
     l[j] = a
 
 
+jok2 = []
 for i in range(len(rosszak)):
+    valtozott = False
     for j in range(len(szabalyok)):
         a = szabalyok[j].split("|")[0]
         b = szabalyok[j].split("|")[1]
@@ -50,10 +52,13 @@ for i in range(len(rosszak)):
             for h in range(k, len(rosszak[i])):
                 if rosszak[i][k] == a and rosszak[i][h] == b and h <= k:
                     csere(rosszak[i], k, h)
+                    valtozott = True
+    if valtozott:
+        jok2.append(rosszak[i])
                     
 s = 0 
-for i in range(len(rosszak)):
-    s += int(rosszak[i][int((len(rosszak[i])-1)/2)])
+for i in range(len(jok2)):
+    s += int(jok2[i][int((len(jok2[i])-1)/2)])
 
 # 4937 - low
 # 5013 - high
