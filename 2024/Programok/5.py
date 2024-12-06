@@ -11,6 +11,7 @@ rosszak = []
 for i in range(len(oldalak)):
     oldal = oldalak[i].split(",")
     jo = True
+    jo2 =False
     for k in range(len(szabalyok)):
         a = szabalyok[k].split("|")[0]
         b = szabalyok[k].split("|")[1]
@@ -22,10 +23,12 @@ for i in range(len(oldalak)):
             h += 1
         if j < len(oldal) and h < len(oldal) and h < j:
             jo = False
+            jo2 = True
+            
 
     if jo:
         jok.append(oldal)
-    else:
+    if jo2:
         rosszak.append(oldal)
 
 # print(jok)
@@ -41,6 +44,7 @@ def csere(l, i ,j):
     l[i] = l[j]
     l[j] = a
 
+# print(rosszak)
 
 jok2 = []
 for i in range(len(rosszak)):
@@ -49,13 +53,16 @@ for i in range(len(rosszak)):
         a = szabalyok[j].split("|")[0]
         b = szabalyok[j].split("|")[1]
         for k in range(len(rosszak[i])):
-            for h in range(k, len(rosszak[i])):
-                if rosszak[i][k] == a and rosszak[i][h] == b and h <= k:
+            for h in range(len(rosszak[i])):
+                while rosszak[i][k] == a and rosszak[i][h] == b and h <= k:
+                    # print("asd")
                     csere(rosszak[i], k, h)
                     valtozott = True
     if valtozott:
         jok2.append(rosszak[i])
-                    
+
+# print(jok2)
+      
 s = 0 
 for i in range(len(jok2)):
     s += int(jok2[i][int((len(jok2[i])-1)/2)])
